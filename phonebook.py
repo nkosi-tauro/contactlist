@@ -18,7 +18,8 @@ def search_contact(key) :
 
 def delete_contact(key) :
   """Deletes a contact from the phonebook."""
-  return print(phonebook)
+  phonebook.pop(key)
+  return print(f"{key} has been deleted from the phonebook.\n")
 
 def sort_contact() :
   """Sorts the contacts in the phonebook."""
