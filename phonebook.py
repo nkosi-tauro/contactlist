@@ -8,6 +8,8 @@ program_open = True
 
 def add_contact(key, value) :
   """Adds a new contact to the phonebook.""" 
+  phonebook[key] = value
+  print(f"{key} has been added to the phonebook.\n")
   return phonebook
 
 def search_contact(key) :
@@ -27,6 +29,28 @@ def display_contacts() :
   """Displays all contacts in the phonebook."""
   return phonebook
 
+def contact_validation() :
+  """Validate the contact name and number before they are entered into the phonebook."""
+  # check if contact name is greater or equal to 5 characters
+  isLongEnough = False
+  # check if contact number is a number
+  isNumber = False
+
+  while not isLongEnough:
+    contact_name = input('Enter the name of the contact: ')
+    if len(contact_name) >= 5:
+      isLongEnough = True
+    else:
+      print('The name must be at least 5 characters long.\n')
+      
+  while not isNumber:
+    try :
+      contact_number = int(input('Enter the contact number: '))
+      isNumber = True
+    except ValueError:
+      print('The number must be a number.\n')
+
+  return contact_name, contact_number
 
 while program_open:
     #Main Program Menu
@@ -43,6 +67,9 @@ while program_open:
 
     if choice == 1 :
       print('Add a new contact to the phonebook.\n')
+      # Validate the contact name and number before they are entered into the phonebook.
+      contact_name, contact_number = contact_validation()
+      add_contact(contact_name, contact_number)
       print("You will be returned to the main menu in 2 seconds.\n")
       time.sleep(2)
 
