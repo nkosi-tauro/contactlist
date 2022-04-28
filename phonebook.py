@@ -1,7 +1,7 @@
 # Welcome to the Rubiks Phone Book.
 import time
 
-#Dictionary of contacts
+#Dictionary of contacts (contact name and contact number, key value pairs)
 # This will be used to store the contacts.
 phonebook = {}
 program_open = True
@@ -23,7 +23,7 @@ def delete_contact(key) :
   return print(f"{key} has been deleted from the phonebook.\n")
 
 def sort_contact() :
-  """Sorts the contacts in the phonebook."""
+  """Sort the contacts in the phonebook by alpabetical order"""
   return phonebook
 
 
@@ -75,8 +75,9 @@ def contact_exists(choice) :
   
   return contact_name
 
+#Main Program Menu Loop
+# The program will run until the user chooses to exit. (Option 6)
 while program_open:
-    #Main Program Menu
     print('Welcome to the Rubiks Phone Book.\n')
     print('What would you like to do?\n')
     print('1. Add a new contact')
