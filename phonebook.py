@@ -9,12 +9,13 @@ program_open = True
 def add_contact(key, value) :
   """Adds a new contact to the phonebook.""" 
   phonebook[key] = value
-  print(f"{key} has been added to the phonebook.\n")
+  print(f"The Contact Name: '{key}' and Contact Number: '{value}' have been added to the phonebook.\n")
   return phonebook
 
 def search_contact(key) :
   """Searches for a contact in the phonebook."""
-  return phonebook
+  number = phonebook[key]
+  return print(f"The Contact Name: '{key}' and Contact Number: '{number}' have been found in the phonebook.\n")
 
 def delete_contact(key) :
   """Deletes a contact from the phonebook."""
@@ -70,7 +71,7 @@ def contact_exists(choice) :
   elif contact_name in phonebook and choice == 2:
     search_contact(contact_name)
   else:
-    print(f'The contact {contact_name} does not exist in the phonebook.\n')
+    print(f'The Contact Name: "{contact_name}" does not exist in the phonebook.\n')
   
   return contact_name
 
@@ -96,6 +97,7 @@ while program_open:
       time.sleep(2)
 
     elif choice == 2 :
+      print('Search for a contact name from the phonebook.\n')
       # Validate if the contact name to be searched for exists in the phonebook.
       contact_exists(choice)
       print("You will be returned to the main menu in 2 seconds.\n")
