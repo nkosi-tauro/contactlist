@@ -27,7 +27,15 @@ def sort_contact() :
 
 def display_contacts() :
   """Displays all contacts in the phonebook."""
-  return phonebook
+  print("Rubicks Phone Book\n")
+  if len(phonebook) == 0:
+    return print('The phonebook is empty.\n')
+  else:
+    print("You have the following contacts in your phonebook:")
+    print ("{:<10} {:<10}".format('NAME','NUMBER'))
+    for key, value in phonebook.items():
+      contact_number = value
+      print ("{:<10} {:<10}".format(key, contact_number))
 
 def contact_validation() :
   """Validate the contact name and number before they are entered into the phonebook."""
