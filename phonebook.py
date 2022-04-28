@@ -52,6 +52,19 @@ def contact_validation() :
 
   return contact_name, contact_number
 
+def contact_exists(choice) :
+  """Checks if selected key/contact name to be exists in the phonebook."""
+  contact_name = input('Enter the name of the contact: ')
+  # check if contact name is in the phonebook and then either delete or search for the contact based on user choice
+  if contact_name in phonebook and choice == 3:
+    delete_contact(contact_name)
+  elif contact_name in phonebook and choice == 2:
+    search_contact(contact_name)
+  else:
+    print(f'The contact {contact_name} does not exist in the phonebook.\n')
+  
+  return contact_name
+
 while program_open:
     #Main Program Menu
     print('Welcome to the Rubiks Phone Book.\n')
@@ -74,10 +87,14 @@ while program_open:
       time.sleep(2)
 
     elif choice == 2 :
+      # Validate if the contact name to be searched for exists in the phonebook.
+      contact_exists(choice)
       print("You will be returned to the main menu in 2 seconds.\n")
       time.sleep(2)
 
     elif choice == 3 :
+      # Validate if the contact name to be deleted exists in the phonebook.
+      contact_exists(choice)
       print('Delete a contact from the phonebook.\n')
       print("You will be returned to the main menu in 2 seconds.\n")
       time.sleep(2)
