@@ -102,12 +102,11 @@ while program_open:
       time.sleep(2)
 
     elif choice == 3 :
+      print('Delete a contact from the phonebook.\n')
       # Validate if the contact name to be deleted exists in the phonebook.
       contact_exists(choice)
-      print('Delete a contact from the phonebook.\n')
       print("You will be returned to the main menu in 2 seconds.\n")
       time.sleep(2)
-
 
     elif choice == 4 :
       sort_contact()
