@@ -1,46 +1,54 @@
-# Welcome to the Rubiks Phone Book.
+# Welcome to the Rubiks Contact List Application.
 import time
 
 #Dictionary of contacts (contact name and contact number, key value pairs)
 # This will be used to store the contacts.
-phonebook = {}
+contactlist = {}
 program_open = True
 
 def add_contact(key, value) :
-  """Adds a new contact to the phonebook.""" 
-  phonebook[key] = value
-  print(f"The Contact Name: '{key}' and Contact Number: '{value}' have been added to the phonebook.\n")
-  return phonebook
+  """Adds a new contact to the contactlist.""" 
+  contactlist[key] = value
+  print(f"The Contact Name: '{key}' and Contact Number: '{value}' have been added to the Contact List.\n")
+  return contactlist
 
 def search_contact(key) :
-  """Searches for a contact in the phonebook."""
-  number = phonebook[key]
-  return print(f"The Contact Name: '{key}' and Contact Number: '{number}' have been found in the phonebook.\n")
+  """Searches for a contact in the contactlist."""
+  number = contactlist[key]
+  return print(f"The Contact Name: '{key}' and Contact Number: '{number}' have been found in the Contact List.\n")
 
 def delete_contact(key) :
-  """Deletes a contact from the phonebook."""
-  phonebook.pop(key)
-  return print(f"{key} has been deleted from the phonebook.\n")
+  """Deletes a contact from the contactlist."""
+  contactlist.pop(key)
+  return print(f"{key} has been deleted from the Contact List.\n")
 
-def sort_contact() :
-  """Sort the contacts in the phonebook by alpabetical order"""
-  return phonebook
+def sort_contacts() :
+  """Sort the contacts in the contactlist by alpabetical order"""
+  print("Rubicks Phone Book\n")
+  if len(contactlist) == 0:
+    return print('Cannot sort an empty Contact List.\n')
+  else:
+    print("Your contactlist has been sorted alphabeticaly :")
+    print ("{:<10} {:<10}".format('NAME','NUMBER'))
+    for key, value in sorted(contactlist.items()):
+      contact_number = value
+      print ("{:<10} {:<10}".format(key, contact_number))
 
 
 def display_contacts() :
-  """Displays all contacts in the phonebook."""
+  """Displays all contacts in the contactlist."""
   print("Rubicks Phone Book\n")
-  if len(phonebook) == 0:
-    return print('The phonebook is empty.\n')
+  if len(contactlist) == 0:
+    return print('The Contact List is empty.\n')
   else:
-    print("You have the following contacts in your phonebook:")
+    print("You have the following contacts in your Contact List:")
     print ("{:<10} {:<10}".format('NAME','NUMBER'))
-    for key, value in phonebook.items():
+    for key, value in contactlist.items():
       contact_number = value
       print ("{:<10} {:<10}".format(key, contact_number))
 
 def contact_validation() :
-  """Validate the contact name and number before they are entered into the phonebook."""
+  """Validate the contact name and number before they are entered into the contactlist."""
   # check if contact name is greater or equal to 5 characters
   isLongEnough = False
   # check if contact number is a number
@@ -63,15 +71,15 @@ def contact_validation() :
   return contact_name, contact_number
 
 def contact_exists(choice) :
-  """Checks if selected key/contact name to be exists in the phonebook."""
+  """Checks if selected key/contact name to be exists in the contactlist."""
   contact_name = input('Enter the name of the contact: ')
-  # check if contact name is in the phonebook and then either delete or search for the contact based on user choice
-  if contact_name in phonebook and choice == 3:
+  # check if contact name is in the contactlist and then either delete or search for the contact based on user choice
+  if contact_name in contactlist and choice == 3:
     delete_contact(contact_name)
-  elif contact_name in phonebook and choice == 2:
+  elif contact_name in contactlist and choice == 2:
     search_contact(contact_name)
   else:
-    print(f'The Contact Name: "{contact_name}" does not exist in the phonebook.\n')
+    print(f'The Contact Name: "{contact_name}" does not exist in the contactlist.\n')
   
   return contact_name
 
@@ -90,34 +98,34 @@ while program_open:
     choice = int(input('Enter your choice: '))
 
     if choice == 1 :
-      print('Add a new contact to the phonebook.\n')
-      # Validate the contact name and number before they are entered into the phonebook.
+      print('Add a new contact to the contactlist.\n')
+      # Validate the contact name and number before they are entered into the contactlist.
       contact_name, contact_number = contact_validation()
       add_contact(contact_name, contact_number)
       print("You will be returned to the main menu in 2 seconds.\n")
       time.sleep(2)
 
     elif choice == 2 :
-      print('Search for a contact name from the phonebook.\n')
-      # Validate if the contact name to be searched for exists in the phonebook.
+      print('Search for a contact name from the contactlist.\n')
+      # Validate if the contact name to be searched for exists in the contactlist.
       contact_exists(choice)
       print("You will be returned to the main menu in 2 seconds.\n")
       time.sleep(2)
 
     elif choice == 3 :
-      print('Delete a contact from the phonebook.\n')
-      # Validate if the contact name to be deleted exists in the phonebook.
+      print('Delete a contact from the contactlist.\n')
+      # Validate if the contact name to be deleted exists in the contactlist.
       contact_exists(choice)
       print("You will be returned to the main menu in 2 seconds.\n")
       time.sleep(2)
 
     elif choice == 4 :
-      sort_contact()
+      sort_contacts()
       print("You will be returned to the main menu in 2 seconds.\n")
       time.sleep(2)
 
     elif choice == 5 :
-      # Display all contacts in the phonebook.
+      # Display all contacts in the contactlist.
       display_contacts()
       print("\nYou will be returned to the main menu in 4 seconds.\n")
       time.sleep(4)
@@ -125,7 +133,7 @@ while program_open:
     elif choice == 6 :
       # Exit the program
       program_open = False
-      print('Thank you for using the Rubiks Phone Book.\n')
+      print('Thank you for using the Rubiks Contact List Application.\n')
     else :
       print('Invalid choice. Try again.')
       
