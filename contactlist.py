@@ -86,7 +86,7 @@ def contact_exists(choice) :
 #Main Program Menu Loop
 # The program will run until the user chooses to exit. (Option 6)
 while program_open:
-    print('Welcome to the Rubiks Phone Book.\n')
+    print('Welcome to the Rubiks Contact List.\n')
     print('What would you like to do?\n')
     print('1. Add a new contact')
     print('2. Search a contact')
