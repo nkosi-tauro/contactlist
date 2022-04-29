@@ -41,11 +41,15 @@ def display_contacts() :
   if len(contactlist) == 0:
     return print('The Contact List is empty.\n')
   else:
-    print("You have the following contacts in your Contact List:")
-    print ("{:<10} {:<10}".format('NAME','NUMBER'))
-    for key, value in contactlist.items():
-      contact_number = value
-      print ("{:<10} {:<10}".format(key, contact_number))
+    doYouWantToSort = input('Do you want to sort the contacts alphabetically before displaying them? (y/n): ')
+    if doYouWantToSort == 'y':
+      sort_contacts()
+    else:
+      print("You have the following contacts in your Contact List:")
+      print ("{:<10} {:<10}".format('NAME','NUMBER'))
+      for key, value in contactlist.items():
+        contact_number = value
+        print ("{:<10} {:<10}".format(key, contact_number))
 
 def contact_validation() :
   """Validate the contact name and number before they are entered into the contactlist."""
