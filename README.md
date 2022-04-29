@@ -15,7 +15,6 @@
 
 <p align="center">
   <a href="#dart-about">About</a> &#xa0; | &#xa0; 
-  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
   <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
   <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
   <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
@@ -28,14 +27,9 @@
 ## :dart: About ##
 
 Welcome to the Rubiks Contact List!  
-This is a simple contact list terminal application that I built using python. It allows the user to add, sort, delete and search for contacts.
+This is a simple contact list terminal application with basic CRUD functionality built using python. 
+It allows the user to add, sort, edit, delete and search for contacts. There is no persistent storage yet, a dictionary is used to temporaliry store the contacts in Key(contact name) and Value(contact number) pairs.
 
-
-## :sparkles: Features ##
-
-:heavy_check_mark: CREATE ;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3;
 
 ## :rocket: Technologies ##
 
