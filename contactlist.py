@@ -55,19 +55,17 @@ def delete_contact() :
   messagebox.showinfo("Contact Deleted", f"The Contact '{selected_item.split(' ')[0]}' has been deleted from the Contact List.\n")
   # Refresh Listbox to reflect changes
   display_contacts()
+  # Clear the input fields
+  clear_contact_input()
 
-def edit_contact(key) :
+def edit_contact() :
   """Edits a contact in the contactlist."""
-  isNumber = False
-  while not isNumber:
-    try :
-      contact_number_update = int(input('Enter the updated contact number: '))
-      isNumber = True
-    except ValueError:
-      print('The number must be a number.\n')
-  contactlist.update({key : contact_number_update})
-  print(f"The Contact Name: '{key}' has been edited with the new Contact Number: '{contact_number_update}'.\n")
-  return contactlist
+  contactlist_dictionary.update({selected_item.split(" ")[0] : contact_number.get()})
+  messagebox.showinfo("Contact Edited", f"The Contact Name: '{selected_item.split(' ')[0]}' has been edited with the new Contact Number: '{contact_number.get()}'.\n")
+  # Refresh Listbox to reflect changes
+  display_contacts()
+  # Clear the input fields
+  clear_contact_input()
 
 def sort_contacts() :
   """Sort the contacts in the contactlist by alpabetical order"""
