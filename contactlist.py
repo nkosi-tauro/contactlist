@@ -7,13 +7,27 @@ rubkisApp = Tk()
 rubkisApp.title('Rubiks Contact List')
 rubkisApp.geometry('700x350')
 
+# Dictionary to store the contactlist
+contactlist_dictionary = {}
+
+def display_contacts():
+    contactlist.delete(0, END)
+    for key, value in sorted(contactlist_dictionary.items()):
+      contact_number = value
+      contactlist.insert(END,"{:<10} {:<10}".format(key, contact_number))
 
 
-def add_contact(key, value) :
+def add_contact() :
   """Adds a new contact to the contactlist.""" 
-  contactlist[key] = value
-  print(f"The Contact Name: '{key}' and Contact Number: '{value}' have been added to the Contact List.\n")
-  return contactlist
+  if contact_name.get() == '' or contact_number.get() == '':
+    messagebox.showerror('Required Fields', 'Please Enter the Contact Name and Contact Number')
+    return
+  contactlist_dictionary[contact_name.get()] = contact_number.get()
+  contactlist.delete(0, END)
+  contactlist.insert(END, (contact_name.get(), contact_number.get()))
+  messagebox.showinfo("Contact Added", f"The Contact Name: '{contact_name.get()}' and Contact Number: '{contact_number.get()}' have been added to the Contact List.\n")
+  clear_contact_input()
+  display_contacts()
 
 def search_contact(key) :
   """Searches for a contact in the contactlist."""
@@ -51,21 +65,25 @@ def sort_contacts() :
       print ("{:<10} {:<10}".format(key, contact_number))
 
 
-def display_contacts() :
-  """Displays all contacts in the contactlist."""
-  print("Rubicks Phone Book\n")
-  if len(contactlist) == 0:
-    return print('The Contact List is empty.\n')
-  else:
-    doYouWantToSort = input('Do you want to sort the contacts alphabetically before displaying them? (y/n): ')
-    if doYouWantToSort == 'y':
-      sort_contacts()
-    else:
-      print("You have the following contacts in your Contact List:")
-      print ("{:<10} {:<10}".format('NAME','NUMBER'))
-      for key, value in contactlist.items():
-        contact_number = value
-        print ("{:<10} {:<10}".format(key, contact_number))
+def clear_contact_input():
+    contact_name_entry.delete(0, END)
+    contact_number_entry.delete(0, END)
+
+# def display_contacts() :
+#   """Displays all contacts in the contactlist."""
+#   print("Rubicks Phone Book\n")
+#   if len(contactlist) == 0:
+#     return print('The Contact List is empty.\n')
+#   else:
+#     doYouWantToSort = input('Do you want to sort the contacts alphabetically before displaying them? (y/n): ')
+#     if doYouWantToSort == 'y':
+#       sort_contacts()
+#     else:
+#       print("You have the following contacts in your Contact List:")
+#       print ("{:<10} {:<10}".format('NAME','NUMBER'))
+#       for key, value in contactlist.items():
+#         contact_number = value
+#         print ("{:<10} {:<10}".format(key, contact_number))
 
 
 # Input Variables and Style Definitions for the the GUI Layout
@@ -102,7 +120,7 @@ scrollbar.grid(row=3, column=3)
 contactlist.configure(yscrollcommand=scrollbar.set)
 scrollbar.configure(command=contactlist.yview)
 # Bind selected item 
-contactlist.bind('<<ListboxSelect>>', select_item)
+# contactlist.bind('<<ListboxSelect>>', select_item)
 
 
 # Action Buttons (Add, Search, Delete, Edit, Sort, Display)
