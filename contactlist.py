@@ -34,10 +34,27 @@ def search_contact(key) :
   number = contactlist[key]
   return print(f"The Contact Name: '{key}' and Contact Number: '{number}' have been found in the Contact List.\n")
 
-def delete_contact(key) :
+def selected_contact(event):
+  "Highlights the selected contact and prepares it for modification(edit or delete)"
+  try:
+    global selected_item
+    index = contactlist.curselection()[0]
+    selected_item = contactlist.get(index)
+
+    contact_name_entry.delete(0, END)
+    contact_name_entry.insert(END, selected_item[1])
+    contact_number_entry.delete(0, END)
+    contact_number_entry.insert(END, selected_item[2])
+  except IndexError:
+    pass
+
+
+def delete_contact() :
   """Deletes a contact from the contactlist."""
-  contactlist.pop(key)
-  return print(f"{key} has been deleted from the Contact List.\n")
+  contactlist_dictionary.pop(selected_item.split(" ")[0])
+  messagebox.showinfo("Contact Deleted", f"The Contact '{selected_item.split(' ')[0]}' has been deleted from the Contact List.\n")
+  # Refresh Listbox to reflect changes
+  display_contacts()
 
 def edit_contact(key) :
   """Edits a contact in the contactlist."""
@@ -69,22 +86,6 @@ def clear_contact_input():
     contact_name_entry.delete(0, END)
     contact_number_entry.delete(0, END)
 
-# def display_contacts() :
-#   """Displays all contacts in the contactlist."""
-#   print("Rubicks Phone Book\n")
-#   if len(contactlist) == 0:
-#     return print('The Contact List is empty.\n')
-#   else:
-#     doYouWantToSort = input('Do you want to sort the contacts alphabetically before displaying them? (y/n): ')
-#     if doYouWantToSort == 'y':
-#       sort_contacts()
-#     else:
-#       print("You have the following contacts in your Contact List:")
-#       print ("{:<10} {:<10}".format('NAME','NUMBER'))
-#       for key, value in contactlist.items():
-#         contact_number = value
-#         print ("{:<10} {:<10}".format(key, contact_number))
-
 
 # Input Variables and Style Definitions for the the GUI Layout
 # contact_name
@@ -110,6 +111,7 @@ search_entry.grid(row=1, column=1)
 
 # Contact List (Listbox)
 # The listbox will be used to display the contacts in the contactlist.
+contactlist_label = Label(rubkisApp, text='NAME NUMBER', font=('bold', 14))
 contactlist = Listbox(rubkisApp, height=8, width=50, border=0)
 contactlist.grid(row=3, column=0, columnspan=3, rowspan=6, pady=20, padx=20)
 # Create scrollbar
@@ -120,7 +122,7 @@ scrollbar.grid(row=3, column=3)
 contactlist.configure(yscrollcommand=scrollbar.set)
 scrollbar.configure(command=contactlist.yview)
 # Bind selected item 
-# contactlist.bind('<<ListboxSelect>>', select_item)
+contactlist.bind('<<ListboxSelect>>', selected_contact)
 
 
 # Action Buttons (Add, Search, Delete, Edit, Sort, Display)
