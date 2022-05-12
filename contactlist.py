@@ -139,7 +139,7 @@ edit_btn.grid(row=5, column=4)
 sort_btn = Button(rubkisApp, text='Sort Contact', width=12, command=sort_contacts)
 sort_btn.grid(row=6, column=4)
 
-clear_btn = Button(rubkisApp, text='Clear Input', width=12)
+clear_btn = Button(rubkisApp, text='Clear Input', width=12, command=clear_contact_input)
 clear_btn.grid(row=7, column=4)
 
 
