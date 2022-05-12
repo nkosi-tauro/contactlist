@@ -1,10 +1,13 @@
 # Welcome to the Rubiks Contact List Application.
-import time
+# The Tkinter package will be used to create the GUI.
+from tkinter import * 
+from tkinter import messagebox
 
-#Dictionary of contacts (contact name and contact number, key value pairs)
-# This will be used to store the contacts.
-contactlist = {}
-program_open = True
+rubkisApp = Tk()
+rubkisApp.title('Rubiks Contact List')
+rubkisApp.geometry('700x350')
+
+
 
 def add_contact(key, value) :
   """Adds a new contact to the contactlist.""" 
@@ -64,99 +67,63 @@ def display_contacts() :
         contact_number = value
         print ("{:<10} {:<10}".format(key, contact_number))
 
-# Validation Methods for user input
-def contact_validation() :
-  """Validate the contact name and number before they are entered into the contactlist."""
-  # check if contact name is greater or equal to 5 characters
-  isLongEnough = False
-  # check if contact number is a number
-  isNumber = False
 
-  while not isLongEnough:
-    contact_name = input('Enter the name of the contact: ')
-    if len(contact_name) >= 5:
-      isLongEnough = True
-    else:
-      print('The name must be at least 5 characters long.\n')
-      
-  while not isNumber:
-    try :
-      contact_number = int(input('Enter the contact number: '))
-      isNumber = True
-    except ValueError:
-      print('The number must be a number.\n')
+# Input Variables and Style Definitions for the the GUI Layout
+# contact_name
+contact_name = StringVar()
+contact_name_label = Label(rubkisApp, text='Contact Name', font=('bold', 14), pady=20)
+contact_name_label.grid(row=0, column=0, sticky=W)
+contact_name_entry = Entry(rubkisApp, textvariable=contact_name)
+contact_name_entry.grid(row=0, column=1)
 
-  return contact_name, contact_number
+# contact_number
+contact_number = StringVar()
+contact_number_label = Label(rubkisApp, text='Contact Number', font=('bold', 14))
+contact_number_label.grid(row=0, column=2, sticky=W)
+contact_number_entry = Entry(rubkisApp, textvariable=contact_number)
+contact_number_entry.grid(row=0, column=3)
 
-# Validation to check if key is in contactlist
-def contact_exists(choice) :
-  """Checks if selected key/contact name to be exists in the contactlist."""
-  contact_name = input('Enter the name of the contact: ')
-  # check if contact name is in the contactlist and then either delete or search for the contact based on user choice
-  if contact_name in contactlist and choice == 2:
-    search_contact(contact_name)
-  elif contact_name in contactlist and choice == 3:
-    delete_contact(contact_name)
-  elif contact_name in contactlist and choice == 4:
-    edit_contact(contact_name)
-  else:
-    print(f'The Contact Name: "{contact_name}" does not exist in the contactlist.\n')
-  
-  return contact_name
+# Search Box
+search_text = StringVar()
+search_label = Label(rubkisApp, text='Search Contact', font=('bold', 14))
+search_label.grid(row=1, column=0, sticky=W)
+search_entry = Entry(rubkisApp, textvariable=search_text)
+search_entry.grid(row=1, column=1)
 
-#Main Program Menu Loop
-# The program will run until the user chooses to exit. (Option 6)
-while program_open:
-    print('Welcome to the Rubiks Contact List.\n')
-    print('What would you like to do?\n')
-    print('1. Add a new contact')
-    print('2. Search for a contact')
-    print('3. Delete a contact')
-    print('4. Edit a contact')
-    print('5. Display all contacts')
-    print('6. Quit the program')
-    print('\n')
-    choice = int(input('Enter your choice: '))
+# Contact List (Listbox)
+# The listbox will be used to display the contacts in the contactlist.
+contactlist = Listbox(rubkisApp, height=8, width=50, border=0)
+contactlist.grid(row=3, column=0, columnspan=3, rowspan=6, pady=20, padx=20)
+# Create scrollbar
+# The scrollbar will be used to scroll the listbox should the contents start overflowing.
+scrollbar = Scrollbar(rubkisApp)
+scrollbar.grid(row=3, column=3)
+# Set scroll to listbox
+contactlist.configure(yscrollcommand=scrollbar.set)
+scrollbar.configure(command=contactlist.yview)
+# Bind selected item 
+contactlist.bind('<<ListboxSelect>>', select_item)
 
-    if choice == 1 :
-      print('Add a new contact to the contactlist.\n')
-      # Validate the contact name and number before they are entered into the contactlist.
-      contact_name, contact_number = contact_validation()
-      add_contact(contact_name, contact_number)
-      print("You will be returned to the main menu in 2 seconds.\n")
-      time.sleep(2)
 
-    elif choice == 2 :
-      print('Search for a contact name from the contactlist.\n')
-      # Validate if the contact name to be searched for exists in the contactlist.
-      contact_exists(choice)
-      print("You will be returned to the main menu in 2 seconds.\n")
-      time.sleep(2)
+# Action Buttons (Add, Search, Delete, Edit, Sort, Display)
+add_btn = Button(rubkisApp, text='Add Contact', width=12, command=add_contact)
+add_btn.grid(row=2, column=4)
 
-    elif choice == 3 :
-      print('Delete a contact from the contactlist.\n')
-      # Validate if the contact name to be deleted exists in the contactlist.
-      contact_exists(choice)
-      print("You will be returned to the main menu in 2 seconds.\n")
-      time.sleep(2)
+search_btn = Button(rubkisApp, text='Search Contact', width=12, command=search_contact)
+search_btn.grid(row=3, column=4)
 
-    elif choice == 4 :
-      print('Edit a contact from the contactlist.\n')
-      # Validate if the contact name to be edited exists in the contactlist.
-      contact_exists(choice)
-      print("You will be returned to the main menu in 2 seconds.\n")
-      time.sleep(2)
+remove_btn = Button(rubkisApp, text='Remove Contact', width=12, command=delete_contact)
+remove_btn.grid(row=4, column=4)
 
-    elif choice == 5 :
-      # Display all contacts in the contactlist.
-      display_contacts()
-      print("\nYou will be returned to the main menu in 4 seconds.\n")
-      time.sleep(4)
+edit_btn = Button(rubkisApp, text='Edit Contact', width=12, command=edit_contact)
+edit_btn.grid(row=5, column=4)
 
-    elif choice == 6 :
-      # Exit the program
-      program_open = False
-      print('Thank you for using the Rubiks Contact List Application.\n')
-    else :
-      print('Invalid choice. Try again.')
-      
+sort_btn = Button(rubkisApp, text='Sort Contact', width=12, command=sort_contacts)
+sort_btn.grid(row=6, column=4)
+
+clear_btn = Button(rubkisApp, text='Clear Input', width=12)
+clear_btn.grid(row=7, column=4)
+
+
+# Start the tkinter program
+rubkisApp.mainloop()
