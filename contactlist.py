@@ -12,7 +12,7 @@ contactlist_dictionary = {}
 
 def display_contacts():
     contactlist.delete(0, END)
-    for key, value in sorted(contactlist_dictionary.items()):
+    for key, value in contactlist_dictionary.items():
       contact_number = value
       contactlist.insert(END,"{:<10} {:<10}".format(key, contact_number))
 
@@ -29,10 +29,14 @@ def add_contact() :
   clear_contact_input()
   display_contacts()
 
-def search_contact(key) :
+def search_contact() :
   """Searches for a contact in the contactlist."""
-  number = contactlist[key]
-  return print(f"The Contact Name: '{key}' and Contact Number: '{number}' have been found in the Contact List.\n")
+  # Check if the search string exists as a key in the dictionary
+  if search_entry.get() in contactlist_dictionary:
+    number = contactlist_dictionary[search_entry.get()]
+    messagebox.showinfo("Contact Found", f"The Contact Name: '{search_entry.get()}' and Contact Number: '{number}' have been found in the Contact List.\n")
+  else:
+    messagebox.showerror("Contact Not Found", f"The Contact Name: '{search_entry.get()}' has not been found in the Contact List.\n")
 
 def selected_contact(event):
   "Highlights the selected contact and prepares it for modification(edit or delete)"
