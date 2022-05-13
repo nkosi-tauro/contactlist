@@ -4,18 +4,21 @@ from tkinter import *
 from tkinter import messagebox
 
 rubkisApp = Tk()
+# Window Title
 rubkisApp.title('Rubiks Contact List')
+# Window Size
 rubkisApp.geometry('700x350')
 
-# Dictionary to store the contactlist
+#Dictionary of contacts (contact name and contact number, key value pairs)
+# This will be used to store the contacts.
 contactlist_dictionary = {}
 
 def display_contacts():
-    contactlist.delete(0, END)
-    for key, value in contactlist_dictionary.items():
-      contact_number = value
-      contactlist.insert(END,"{:<10} {:<10}".format(key, contact_number))
-
+  """Displays the contacts in the contactlist."""
+  contactlist.delete(0, END)
+  for key, value in contactlist_dictionary.items():
+    contact_number = value
+    contactlist.insert(END,"{:<10} {:<10}".format(key, contact_number))
 
 def add_contact() :
   """Adds a new contact to the contactlist.""" 
@@ -55,6 +58,7 @@ def selected_contact(event):
 
 def delete_contact() :
   """Deletes a contact from the contactlist."""
+  # get the selected key by splitting the returned string 
   contactlist_dictionary.pop(selected_item.split(" ")[0])
   messagebox.showinfo("Contact Deleted", f"The Contact '{selected_item.split(' ')[0]}' has been deleted from the Contact List.\n")
   # Refresh Listbox to reflect changes
@@ -86,8 +90,9 @@ def sort_contacts() :
 
 
 def clear_contact_input():
-    contact_name_entry.delete(0, END)
-    contact_number_entry.delete(0, END)
+  """Clears the contact input fields."""
+  contact_name_entry.delete(0, END)
+  contact_number_entry.delete(0, END)
 
 
 # Input Variables and Style Definitions for the the GUI Layout
@@ -116,7 +121,7 @@ search_entry.grid(row=1, column=1)
 # The listbox will be used to display the contacts in the contactlist.
 contactlist_label = Label(rubkisApp, text='NAME NUMBER', font=('bold', 14))
 contactlist = Listbox(rubkisApp, height=8, width=50, border=0)
-contactlist.grid(row=3, column=0, columnspan=3, rowspan=6, pady=20, padx=20)
+contactlist.grid(row=3, column=0, columnspan=3, rowspan=6, pady=20, padx=10)
 # Create scrollbar
 # The scrollbar will be used to scroll the listbox should the contents start overflowing.
 scrollbar = Scrollbar(rubkisApp)
@@ -128,24 +133,26 @@ scrollbar.configure(command=contactlist.yview)
 contactlist.bind('<<ListboxSelect>>', selected_contact)
 
 
-# Action Buttons (Add, Search, Delete, Edit, Sort, Display)
+# Action Buttons (Add, Search, Delete, Edit, Sort, Clear)
 add_btn = Button(rubkisApp, text='Add Contact', width=12, command=add_contact)
-add_btn.grid(row=2, column=4)
+# tkinter grid system to position widgets
+add_btn.grid(row=0, column=4, padx=10)
 
-search_btn = Button(rubkisApp, text='Search Contacts', width=12, command=search_contact)
-search_btn.grid(row=3, column=4)
+search_btn = Button(rubkisApp, text='Search', width=12, command=search_contact)
+# Move search button next to search input box
+search_btn.grid(row=1, column=2)
 
 remove_btn = Button(rubkisApp, text='Remove Contact', width=12, command=delete_contact)
-remove_btn.grid(row=4, column=4)
+remove_btn.grid(row=3, column=4)
 
 edit_btn = Button(rubkisApp, text='Edit Contact', width=12, command=edit_contact)
-edit_btn.grid(row=5, column=4)
+edit_btn.grid(row=4, column=4)
 
 sort_btn = Button(rubkisApp, text='Sort Contacts', width=12, command=sort_contacts)
-sort_btn.grid(row=6, column=4)
+sort_btn.grid(row=5, column=4)
 
 clear_btn = Button(rubkisApp, text='Clear Input', width=12, command=clear_contact_input)
-clear_btn.grid(row=7, column=4)
+clear_btn.grid(row=6, column=4)
 
 
 # Start the tkinter program
