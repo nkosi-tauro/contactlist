@@ -27,7 +27,7 @@
 ## :dart: About ##
 
 Welcome to the Rubiks Contact List!  
-This is a simple contact list terminal application with basic CRUD functionality built using python. 
+This is a simple contact list GUI application with basic CRUD functionality built using python and tkinter. 
 It allows the user to add, sort, edit, delete and search for contacts. There is no persistent storage yet, a dictionary is used to temporaliry store the contacts in Key(contact name) and Value(contact number) pairs.
 
 
@@ -36,17 +36,27 @@ It allows the user to add, sort, edit, delete and search for contacts. There is 
 The following tools were used in this project:
 
 - [Python](https://www.python.org/)
-
+- [tKinter](https://www.tkinter.org/)
 
 ## :white_check_mark: Requirements ##
 
-Before starting :checkered_flag:, you need to have [Python 3.6+](https://www.python.org/) installed.
+Before starting :checkered_flag:, you need to have [Python 3.8+](https://www.python.org/) installed.  
+Note : tKinter comes with Python 3.8+ by default. If you are using an older version of Python or if tkinter is not found, you need to install tKinter separately.
+
 
 ## :checkered_flag: Starting ##
 
 ```bash
 # Clone this project
 $ git clone https://github.com/nkosi-tauro/contactlist
+
+#install tkinter if not installed
+Linux: 
+$ sudo apt-get install python3-tk
+Mac:
+$ python3 -m pip install tkinter
+Windows: 
+$ pip install tkinter
 
 # Access the project folder
 $ cd contactlist
@@ -59,7 +69,7 @@ $ python contactlist.py
 
 ```
 ## 📸 Demo Image ##
-![Menu](menu.png)
+![Menu](images/gui.png)
 
 
 ## :memo: License ##
