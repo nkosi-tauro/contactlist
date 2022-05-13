@@ -73,15 +73,16 @@ def edit_contact() :
 
 def sort_contacts() :
   """Sort the contacts in the contactlist by alpabetical order"""
-  print("Rubicks Phone Book\n")
-  if len(contactlist) == 0:
-    return print('Cannot sort an empty Contact List.\n')
+  # Error Handling, check if dictionary is empty
+  if len(contactlist_dictionary) == 0:
+    return messagebox.showerror("Error Sorting",'Cannot sort an empty Contact List.\n')
   else:
-    print("Your contactlist has been sorted alphabeticaly :")
-    print ("{:<10} {:<10}".format('NAME','NUMBER'))
-    for key, value in sorted(contactlist.items()):
+    messagebox.showinfo("Sorting Contacts", "The Contact List has been sorted alphabetically.\n")
+    contactlist.delete(0, END)
+    for key, value in sorted(contactlist_dictionary.items()):
       contact_number = value
-      print ("{:<10} {:<10}".format(key, contact_number))
+      contactlist.insert(END,"{:<10} {:<10}".format(key, contact_number))
+
 
 
 def clear_contact_input():
@@ -131,7 +132,7 @@ contactlist.bind('<<ListboxSelect>>', selected_contact)
 add_btn = Button(rubkisApp, text='Add Contact', width=12, command=add_contact)
 add_btn.grid(row=2, column=4)
 
-search_btn = Button(rubkisApp, text='Search Contact', width=12, command=search_contact)
+search_btn = Button(rubkisApp, text='Search Contacts', width=12, command=search_contact)
 search_btn.grid(row=3, column=4)
 
 remove_btn = Button(rubkisApp, text='Remove Contact', width=12, command=delete_contact)
@@ -140,7 +141,7 @@ remove_btn.grid(row=4, column=4)
 edit_btn = Button(rubkisApp, text='Edit Contact', width=12, command=edit_contact)
 edit_btn.grid(row=5, column=4)
 
-sort_btn = Button(rubkisApp, text='Sort Contact', width=12, command=sort_contacts)
+sort_btn = Button(rubkisApp, text='Sort Contacts', width=12, command=sort_contacts)
 sort_btn.grid(row=6, column=4)
 
 clear_btn = Button(rubkisApp, text='Clear Input', width=12, command=clear_contact_input)
