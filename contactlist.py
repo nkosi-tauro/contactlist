@@ -154,6 +154,9 @@ sort_btn.grid(row=5, column=4)
 clear_btn = Button(rubkisApp, text='Clear Input', width=12, command=clear_contact_input)
 clear_btn.grid(row=6, column=4)
 
+quit_btn = Button(rubkisApp, text='Exit Program', width=12, command=rubkisApp.destroy, bg='red')
+quit_btn.grid(row=8, column=4)
+
 
 # Start the tkinter program
 rubkisApp.mainloop()
