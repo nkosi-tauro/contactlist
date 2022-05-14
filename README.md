@@ -175,7 +175,6 @@ $ python contactlist.py
 2. Accept the prompt to exit the program by clicking the <code>OK</code> button when prompted or decline to exit by clicking <code>Cancel</code>.
 
 </details>
-<br>
 
 ### 🧪 Testing ###
 
@@ -199,7 +198,17 @@ Windows:
 $ python -m unittest test
 ```
 </details>
+<br>
 
+## ✍️ References ##
+
+The following references were used in this project:  
+
+* Tkinter : 
+Amos, D. (Mar 30, 2022) Python GUI Programming With Tkinter. _Real Python_. Available from: [Python GUI Programming With Tkinter](https://realpython.com/python-gui-tkinter/) [Accessed 11 May 2022]
+
+* Testing :
+Shaw, A. (Oct 22, 2018) Getting Started With Testing in Python.  _Real Python_. Available from: [Getting Started With Testing in Python](https://realpython.com/python-testing/) [Accessed 14 May 2022]
 
 ## :memo: License ##
 
@@ -209,5 +218,7 @@ This project is under license from Mozilla Public License. For more details, see
 Made with :heart: by <a href="https://github.com/nkosi-tauro" target="_blank">Nkosilathi Tauro</a>
 
 &#xa0;
+
+
 
 <a href="#top">Back to top</a>
