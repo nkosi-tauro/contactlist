@@ -5,7 +5,7 @@
 import unittest
 from unittest import result
 
-from contactlist_noGui import add_contact, search_contact, delete_contact
+from contactlist_noGui import add_contact,  delete_contact
 
 
 class TestAddContact(unittest.TestCase):
