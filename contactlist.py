@@ -61,7 +61,6 @@ def selected_contact(event):
   except IndexError:
     pass
 
-
 def delete_contact() :
   """Deletes a contact from the contactlist."""
   # Prompt the user to confirm the deletion of the contact
@@ -99,13 +98,15 @@ def sort_contacts() :
         contact_number = value
         contactlist.insert(END,"{:<10} {:<10}".format(key, contact_number))
 
-
-
 def clear_contact_input():
   """Clears the contact input fields."""
   contact_name_entry.delete(0, END)
   contact_number_entry.delete(0, END)
 
+def close_program():
+  """Closes the program."""
+  if messagebox.askyesno(title='Close Program', message=f"Are you sure you want to close the Rubiks Contact List Application?"):
+    return rubkisApp.destroy()
 
 # Input Variables and Style Definitions for the the GUI Layout
 # contact_name
@@ -166,7 +167,7 @@ sort_btn.grid(row=5, column=4)
 clear_btn = Button(rubkisApp, text='Clear Input', width=12, command=clear_contact_input)
 clear_btn.grid(row=6, column=4)
 
-quit_btn = Button(rubkisApp, text='Exit Program', width=12, command=rubkisApp.destroy, bg='red')
+quit_btn = Button(rubkisApp, text='Exit Program', width=12, command=close_program, bg='red')
 quit_btn.grid(row=8, column=4)
 
 
