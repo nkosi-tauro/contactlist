@@ -48,7 +48,7 @@ def search_contact() :
       messagebox.showerror("Contact Not Found", f"The Contact Name: '{search_entry.get()}' has not been found in the Contact List.\n")
 
 def selected_contact(event):
-  "Highlights the selected contact and prepares it for modification(edit or delete)"
+  """Highlights the selected contact and prepares it for modification(edit or delete)"""
   try:
     global selected_item
     index = contactlist.curselection()[0]
@@ -63,26 +63,36 @@ def selected_contact(event):
 
 def delete_contact() :
   """Deletes a contact from the contactlist."""
-  # Prompt the user to confirm the deletion of the contact
-  if messagebox.askyesno(title='Delete Contact', message=f"Are you sure you want to delete the Contact Name: '{selected_item.split(' ')[0]}' and its Contact Number from the list?"):
-    # get the selected key by splitting the returned string 
-    contactlist_dictionary.pop(selected_item.split(" ")[0])
-    messagebox.showinfo("Contact Deleted", f"The Contact '{selected_item.split(' ')[0]}' has been deleted from the Contact List.\n")
-    # Refresh Listbox to reflect changes
-    display_contacts()
-    # Clear the input fields
-    clear_contact_input()
+  # Error Handling, check if the Listbox is empty (means no selected item)
+  isListboxEmpty = contactlist.index("end")
+  if isListboxEmpty == 0:
+    messagebox.showerror('Invalid Request', 'No Items in List/have been selected to be deleted.\n')
+  else :
+    # Prompt the user to confirm the deletion of the contact
+    if messagebox.askyesno(title='Delete Contact', message=f"Are you sure you want to delete the Contact Name: '{selected_item.split(' ')[0]}' and its Contact Number from the list?"):
+      # get the selected key by splitting the returned string 
+      contactlist_dictionary.pop(selected_item.split(" ")[0])
+      messagebox.showinfo("Contact Deleted", f"The Contact '{selected_item.split(' ')[0]}' has been deleted from the Contact List.\n")
+      # Refresh Listbox to reflect changes
+      display_contacts()
+      # Clear the input fields
+      clear_contact_input()
 
 def edit_contact() :
   """Edits a contact in the contactlist."""
-  # Prompt the user to confirm the edit of the contact number
-  if messagebox.askyesno(title='Edit Contact', message=f"Are you sure you want to edit the Contact Name: '{selected_item.split(' ')[0]}' to have a new Contact Number?"):
-    contactlist_dictionary.update({selected_item.split(" ")[0] : contact_number.get()})
-    messagebox.showinfo("Contact Edited", f"The Contact Name: '{selected_item.split(' ')[0]}' has been edited with the new Contact Number: '{contact_number.get()}'.\n")
-    # Refresh Listbox to reflect changes
-    display_contacts()
-    # Clear the input fields
-    clear_contact_input()
+  # Error Handling, check if the Listbox is empty (means no selected item)
+  isListboxEmpty = contactlist.index("end")
+  if isListboxEmpty == 0:
+    messagebox.showerror('Invalid Request', 'No Items in List/have been selected to be deleted.\n')
+  else :
+    # Prompt the user to confirm the edit of the contact number
+    if messagebox.askyesno(title='Edit Contact', message=f"Are you sure you want to edit the Contact Name: '{selected_item.split(' ')[0]}' to have a new Contact Number?"):
+      contactlist_dictionary.update({selected_item.split(" ")[0] : contact_number.get()})
+      messagebox.showinfo("Contact Edited", f"The Contact Name: '{selected_item.split(' ')[0]}' has been edited with the new Contact Number: '{contact_number.get()}'.\n")
+      # Refresh Listbox to reflect changes
+      display_contacts()
+      # Clear the input fields
+      clear_contact_input()
 
 def sort_contacts() :
   """Sort the contacts in the contactlist by alpabetical order"""
