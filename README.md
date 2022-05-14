@@ -175,6 +175,21 @@ $ python contactlist.py
 2. Accept the prompt to exit the program by clicking the <code>OK</code> button when prompted or decline to exit by clicking <code>Cancel</code>.
 
 </details>
+<br>
+
+<details>
+<summary>Testing the application</summary>
+<br>
+
+```bash
+# Run the Unit Tests
+Linux/Mac:
+$ python3 -m unittest test
+
+Windows:
+$ python -m unittest test
+```
+</details>
 
 
 
