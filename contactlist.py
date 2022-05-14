@@ -25,21 +25,27 @@ def add_contact() :
   if contact_name.get() == '' or contact_number.get() == '':
     messagebox.showerror('Required Fields', 'Please Enter the Contact Name and Contact Number')
     return
-  contactlist_dictionary[contact_name.get()] = contact_number.get()
-  contactlist.delete(0, END)
-  contactlist.insert(END, (contact_name.get(), contact_number.get()))
-  messagebox.showinfo("Contact Added", f"The Contact Name: '{contact_name.get()}' and Contact Number: '{contact_number.get()}' have been added to the Contact List.\n")
-  clear_contact_input()
-  display_contacts()
+  # Prompt the user to confirm the addition of the contact
+  if messagebox.askyesno(title='Add Contact', message=f"Are you sure you want to add the Contact Name: '{contact_name.get()}' and Contact Number: '{contact_number.get()}' to the Contact List?"):
+    contactlist_dictionary.update({contact_name.get() : contact_number.get()})
+    contactlist_dictionary[contact_name.get()] = contact_number.get()
+    contactlist.delete(0, END)
+    contactlist.insert(END, (contact_name.get(), contact_number.get()))
+    
+    messagebox.showinfo("Contact Added", f"The Contact Name: '{contact_name.get()}' and Contact Number: '{contact_number.get()}' have been added to the Contact List.\n")
+    clear_contact_input()
+    display_contacts()
 
 def search_contact() :
   """Searches for a contact in the contactlist."""
-  # Check if the search string exists as a key in the dictionary
-  if search_entry.get() in contactlist_dictionary:
-    number = contactlist_dictionary[search_entry.get()]
-    messagebox.showinfo("Contact Found", f"The Contact Name: '{search_entry.get()}' and Contact Number: '{number}' have been found in the Contact List.\n")
-  else:
-    messagebox.showerror("Contact Not Found", f"The Contact Name: '{search_entry.get()}' has not been found in the Contact List.\n")
+  # Prompt the user to confirm the search of the contact
+  if messagebox.askyesno(title='Search Contact', message=f"Are you sure you want to search for the Contact Name: '{search_entry.get()}'?"):
+     # Check if the search string exists as a key in the dictionary
+    if search_entry.get() in contactlist_dictionary:
+      number = contactlist_dictionary[search_entry.get()]
+      messagebox.showinfo("Contact Found", f"The Contact Name: '{search_entry.get()}' and Contact Number: '{number}' have been found in the Contact List.\n")
+    else:
+      messagebox.showerror("Contact Not Found", f"The Contact Name: '{search_entry.get()}' has not been found in the Contact List.\n")
 
 def selected_contact(event):
   "Highlights the selected contact and prepares it for modification(edit or delete)"
@@ -58,34 +64,40 @@ def selected_contact(event):
 
 def delete_contact() :
   """Deletes a contact from the contactlist."""
-  # get the selected key by splitting the returned string 
-  contactlist_dictionary.pop(selected_item.split(" ")[0])
-  messagebox.showinfo("Contact Deleted", f"The Contact '{selected_item.split(' ')[0]}' has been deleted from the Contact List.\n")
-  # Refresh Listbox to reflect changes
-  display_contacts()
-  # Clear the input fields
-  clear_contact_input()
+  # Prompt the user to confirm the deletion of the contact
+  if messagebox.askyesno(title='Delete Contact', message=f"Are you sure you want to delete the Contact Name: '{selected_item.split(' ')[0]}' and its Contact Number from the list?"):
+    # get the selected key by splitting the returned string 
+    contactlist_dictionary.pop(selected_item.split(" ")[0])
+    messagebox.showinfo("Contact Deleted", f"The Contact '{selected_item.split(' ')[0]}' has been deleted from the Contact List.\n")
+    # Refresh Listbox to reflect changes
+    display_contacts()
+    # Clear the input fields
+    clear_contact_input()
 
 def edit_contact() :
   """Edits a contact in the contactlist."""
-  contactlist_dictionary.update({selected_item.split(" ")[0] : contact_number.get()})
-  messagebox.showinfo("Contact Edited", f"The Contact Name: '{selected_item.split(' ')[0]}' has been edited with the new Contact Number: '{contact_number.get()}'.\n")
-  # Refresh Listbox to reflect changes
-  display_contacts()
-  # Clear the input fields
-  clear_contact_input()
+  # Prompt the user to confirm the edit of the contact number
+  if messagebox.askyesno(title='Edit Contact', message=f"Are you sure you want to edit the Contact Name: '{selected_item.split(' ')[0]}' to have a new Contact Number?"):
+    contactlist_dictionary.update({selected_item.split(" ")[0] : contact_number.get()})
+    messagebox.showinfo("Contact Edited", f"The Contact Name: '{selected_item.split(' ')[0]}' has been edited with the new Contact Number: '{contact_number.get()}'.\n")
+    # Refresh Listbox to reflect changes
+    display_contacts()
+    # Clear the input fields
+    clear_contact_input()
 
 def sort_contacts() :
   """Sort the contacts in the contactlist by alpabetical order"""
-  # Error Handling, check if dictionary is empty
-  if len(contactlist_dictionary) == 0:
-    return messagebox.showerror("Error Sorting",'Cannot sort an empty Contact List.\n')
-  else:
-    messagebox.showinfo("Sorting Contacts", "The Contact List has been sorted alphabetically.\n")
-    contactlist.delete(0, END)
-    for key, value in sorted(contactlist_dictionary.items()):
-      contact_number = value
-      contactlist.insert(END,"{:<10} {:<10}".format(key, contact_number))
+  # prompt the user to confirm the sorting of the contacts
+  if messagebox.askyesno(title='Sort Contacts', message=f"Are you sure you want to sort the Contact List by alphabetical order?"):
+    # Error Handling, check if dictionary is empty
+    if len(contactlist_dictionary) == 0:
+      return messagebox.showerror("Error Sorting",'Cannot sort an empty Contact List.\n')
+    else:
+      messagebox.showinfo("Sorting Contacts", "The Contact List has been sorted alphabetically.\n")
+      contactlist.delete(0, END)
+      for key, value in sorted(contactlist_dictionary.items()):
+        contact_number = value
+        contactlist.insert(END,"{:<10} {:<10}".format(key, contact_number))
 
 
 
