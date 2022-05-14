@@ -177,9 +177,18 @@ $ python contactlist.py
 </details>
 <br>
 
+### 🧪 Testing ###
+
+The <code>unittest</code> module is used to test the application. It is part of the Python standard library.  
+The following is a list of the tests that were performed on the application:
+1. Functional Tests - used to test the core application functionality such as the validation methods, the display of the list, the addition of new contacts, the removal of contacts, the editing of contacts, the search of contacts and the sorting of contacts.
+2. Unit Tests - used to test the individual components of the application. In this case, the unit tests were performed on the <code>add_contact</code> and <code>delete_contact</code> functions.
+
 <details>
-<summary>Testing the application</summary>
+<summary>Testing the application (Unit Tests)</summary>
 <br>
+
+After installing and running the application, you can test it by opening the application in the terminal and typing the following command:
 
 ```bash
 # Run the Unit Tests
@@ -190,7 +199,6 @@ Windows:
 $ python -m unittest test
 ```
 </details>
-
 
 
 ## :memo: License ##
