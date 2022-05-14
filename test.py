@@ -14,22 +14,22 @@ class TestAddContact(unittest.TestCase):
         Test that it can add a contact to the contactlist.
         """
         key = "Apple"
-        value = 0
+        value = "023456789"
         result = add_contact(key, value)
         # Should result in a dictionary with the key and value.
-        self.assertEqual(result, {"Apple": 0})
+        self.assertEqual(result, {"Apple": "023456789"})
 
 class TestDeleteContact(unittest.TestCase):
     def test_key_value(self):
         """
         Test that it can delete a contact from the contactlist.
         """
-        contactlist = {"Apple": 0}
+        contactlist = {"Apple": "023456789"}
         # list out keys and values separately
         key_list = list(contactlist.keys())
         val_list = list(contactlist.values())
         # get key with value 0
-        index = val_list.index(0)
+        index = val_list.index("023456789")
         result = delete_contact(key_list[index])
         # if key deleted value should be of None type
         self.assertEqual(0, 0)

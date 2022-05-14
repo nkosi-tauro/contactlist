@@ -11,11 +11,6 @@ def add_contact(key, value) :
   contactlist[key] = value
   return contactlist
 
-def search_contact(key) :
-  """Searches for a contact in the contactlist."""
-  number = contactlist[key]
-  return number
-
 def delete_contact(key) :
   """Deletes a contact from the contactlist."""
   contactlist.pop(key)
