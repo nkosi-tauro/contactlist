@@ -28,7 +28,7 @@
 
 Welcome to the Rubiks Contact List!  
 This is a simple contact list GUI application with basic CRUD functionality built using python and tkinter. 
-It allows the user to add, sort, edit, delete and search for contacts. There is no persistent storage, a dictionary is used to temporaliry store the contacts in Key(contact name) and Value(contact number) pairs.
+It allows the user to add, sort, edit, delete and search for contacts. There is no persistent storage, a dictionary is used to temporarily store the contacts in Key(contact name) and Value(contact number) pairs.
 
 
 ## :rocket: Technologies ##
